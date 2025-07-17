@@ -1,0 +1,55 @@
+using System;
+using System.ComponentModel.Design;
+using System.Reflection;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Xml.Linq;
+using System.Diagnostics.Metrics;
+using System.Collections;
+using System.Threading.Tasks;
+class Program
+{     static string correctPath2(string input)
+    {
+        List<string> inputList = input.Split('/').ToList();
+        List<string> correctPath = new List<string>();
+        Stack<string> path = new Stack<string>();
+        for (int i = 0; i < inputList.Count; i++)
+        {
+            if (inputList[i] == ".")
+            {
+                continue;
+            }
+            else if (inputList[i] == "")
+            {
+                continue;
+            }
+            else if (inputList[i] == "..")
+            {
+                if (path.Count > 0)
+                {
+                    path.Pop();
+                }
+            }
+            else
+            {
+                path.Push(inputList[i]);
+            }
+        }
+            
+        while (path.Count > 0)
+                {
+                    correctPath.Add(path.Pop());
+                }
+        correctPath.Reverse();
+        string result = "/"+string.Join("/", correctPath);
+        return result;
+    }
+    static void Main()
+    {
+        string input = Console.ReadLine();
+        string returnedVal = correctPath2(input);
+        Console.WriteLine(returnedVal);
+       
+
+    }
+}

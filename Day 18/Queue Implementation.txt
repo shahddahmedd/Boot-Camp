@@ -1,0 +1,55 @@
+public class Queue<T>
+{
+    private readonly Stack<T> _items = new();
+    private readonly Stack<T> helperStack = new();
+
+    private int _head = 0;
+
+    // Add item to the end of the queue
+    public void Enqueue(T item)
+    {
+        _items.Push(item);
+    }
+    private void initializeStack()
+    {
+        while (_items.Count > 0)
+            helperStack.Push(_items.Pop());
+    }
+
+    // Remove and return the front item
+    public T Dequeue()
+    {
+        initializeStack();
+
+        if (IsEmpty)
+            throw new InvalidOperationException("Queue is empty.");
+        
+        T value = helperStack.Pop();
+       // _head++;
+
+        // Compact the list to free memory (optional optimization)
+      /*  if (_head > 32 && _head > _items.Count / 2)
+        {
+            _items.RemoveRange(0, _head);
+            _head = 0;
+        }*/
+
+        return value;
+    }
+
+    // Return the front item without removing it
+    public T Peek()
+    {
+        initializeStack();
+
+        if (IsEmpty)
+            throw new InvalidOperationException("Queue is empty.");
+        return helperStack.Peek();
+    }
+
+    // Return the number of elements
+    public int Count => helperStack.Count;
+
+    // Check if queue is empty
+    public bool IsEmpty => Count == 0;
+}

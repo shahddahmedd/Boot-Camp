@@ -1,0 +1,55 @@
+public class Solution
+    {
+        public bool IsValid(string s)
+        {
+
+            bool flag = true;
+            Stack<char> brackets = new Stack<char>();
+            List<char> parenthesis = new List<char>();
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i] != ' ')
+                {
+                    parenthesis.Add(s[i]);
+                }
+            }
+            for (int i = 0; i < parenthesis.Count; i++)
+            {
+                if (parenthesis[i] == '[' || parenthesis[i] == '{' || parenthesis[i] == '(')  //push any opening bracket
+                {
+                    brackets.Push(parenthesis[i]);
+                }
+                else                                                          //in case of a closing bracket
+                {
+                    if (brackets.Count != 0)
+                    {
+                        if (brackets.Peek() == parenthesis[i] - 1 || brackets.Peek() == parenthesis[i] - 2)  //checks if the type of bracket matches
+                        {
+                            brackets.Pop();
+                        }
+                        else
+                        {
+                            flag = false;
+                            break;
+                        }
+                    }
+                    else                                      //in case of a closing bracket without an opening bracket
+                    {
+                        flag = false;
+                        break;
+                    }
+                }
+            }
+
+            if (flag == true && brackets.Count == 0)
+            {
+                return true;
+            }
+
+            else
+            {
+                return false;
+            }
+
+        }
+    }

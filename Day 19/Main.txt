@@ -1,0 +1,44 @@
+using System;
+using System.ComponentModel.Design;
+using System.Reflection;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Xml.Linq;
+using System.Diagnostics.Metrics;
+using System.Collections;
+using System.Threading.Tasks;
+using DelegateTask;
+
+namespace DelegateTask
+{
+    
+    internal class Program
+    {
+        public static void Main(string[] args)
+        {
+            Queue<Emp> employeeQueue = new Queue<Emp>();
+            Emp newEmployee1 = new Emp();
+            newEmployee1.name = "Sara";
+            newEmployee1.gender = "female";
+            employeeQueue.Enqueue(newEmployee1);
+
+            Emp newEmployee2 = new Emp();
+            newEmployee2.name = "Layla";
+            newEmployee2.gender = "female";
+            employeeQueue.Enqueue(newEmployee2);
+
+            Emp newEmployee3 = new Emp();
+            newEmployee3.name = "Asser";
+            newEmployee3.gender = "male";
+            employeeQueue.Enqueue(newEmployee3);
+
+            Emp newEmployee4 = new Emp();
+            newEmployee4.name = "Mustafa";
+            newEmployee4.gender = "male";
+            employeeQueue.Enqueue(newEmployee4);
+
+            Console.WriteLine(employeeQueue.findMale(emp => emp.gender == "male" ? emp.name : null));
+
+        }
+    }
+}

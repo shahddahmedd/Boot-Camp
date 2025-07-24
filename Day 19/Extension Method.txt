@@ -24,5 +24,16 @@ namespace DelegateTask
                 }
                 return "Not exist";
             }
+            public static Emp findMuhammad(this Stack<Emp> employees, Predicate<string> del)
+        {
+                foreach (var i in employees)
+                {
+                   if (del(i.name))  
+                   {
+                      return i;
+                   }
+                }
+            return new Emp();
         }
     }
+}
